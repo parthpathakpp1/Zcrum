@@ -1,18 +1,17 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-
+import Header from "@/components/header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { shadesOfPurple } from "@clerk/themes";
-// import "react-day-picker/dist/style.css";
+import "react-day-picker/dist/style.css";
 import { Toaster } from "sonner";
-import Header from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Jira Clone",
-  description: "",
+  title: "Zcrum",
+  description: "A Project management App",
 };
 
 export default function RootLayout({ children }) {
@@ -42,7 +41,7 @@ export default function RootLayout({ children }) {
             <Toaster richColors />
             <footer className="bg-gray-900 py-12">
               <div className="container mx-auto px-4 text-center text-gray-200">
-                <p>Made with 💗 by Parth Pathak</p>
+                <p>Made with 💗 by Parth</p>
               </div>
             </footer>
           </ThemeProvider>

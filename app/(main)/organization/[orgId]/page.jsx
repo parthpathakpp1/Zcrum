@@ -1,42 +1,39 @@
-// app/organization/[orgId]/page.jsx
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import { getOrganization } from "@/actions/organizations";
+import OrgSwitcher from "@/components/org-switcher";
+import ProjectList from "./_components/project-list";
+import UserIssues from "./_components/user-issues";
 
-import { getOrganization } from '@/actions/organizations';
-import { auth } from '@clerk/nextjs/server';
-
-export default async function OrganizationPage({ params, searchParams }) {
-    // Destructure and await params at the start
-    const orgId = params?.orgId;
-
-    // Get auth first
-    const { userId } = await auth();
+export default async function OrganizationPage({ params }) {
+    const { orgId } = params;
+    const { userId } = auth();
 
     if (!userId) {
-        return <div>Please sign in to view this page</div>;
+        redirect("/sign-in");
     }
 
-    if (!orgId) {
-        return <div>No organization ID provided</div>;
+    const organization = await getOrganization(orgId);
+
+    if (!organization) {
+        return <div>Organization not found</div>;
     }
 
-    try {
-        const organization = await getOrganization(orgId);
+    return (
+        <div className="container mx-auto px-4">
+            <div className="mb-4 flex flex-col sm:flex-row justify-between items-start">
+                <h1 className="text-5xl font-bold gradient-title pb-2">
+                    {organization.name}&rsquo;s Projects
+                </h1>
 
-        if (!organization) {
-            return <div>Organization not found</div>;
-        }
-
-        return (
-            <div>
-                <div>
-                    <h1 className="text-5xl font-bold gradient-title pb-2">
-                        {organization.name}&rsquo;s Projects
-                    </h1>
-                </div>
-                {/* Add more organization details here */}
+                <OrgSwitcher />
             </div>
-        );
-    } catch (error) {
-        console.error('Error fetching organization:', error);
-        return <div>Error: {error.message}</div>;
-    }
+            <div className="mb-4">
+                <ProjectList orgId={organization.id} />
+            </div>
+            <div className="mt-8">
+                <UserIssues userId={userId} />
+            </div>
+        </div>
+    );
 }

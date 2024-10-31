@@ -74,51 +74,60 @@ const features = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 animated-dotted-background"></div>
+
       {/* Hero Section */}
-      <section className="container mx-auto py-20 text-center">
-        <h1 className="text-6xl sm:text-7xl lg:text-8xl font-extrabold gradient-title pb-6 flex flex-col">
-          Streamline Your Workflow <br />
+      <section className="relative container mx-auto py-32 text-center">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
+        <h1 className="text-6xl sm:text-7xl lg:text-8xl font-extrabold gradient-title pb-6 flex flex-col relative">
+          <span className="leading-tight">Streamline Your Workflow</span>
           <span className="flex mx-auto gap-3 sm:gap-4 items-center">
             with
             <Image
-              src={"/logo2.png"}
+              src="/logo2.png"
               alt="Zscrum Logo"
               width={400}
               height={80}
-              className="h-14 sm:h-24 w-auto object-contain"
+              className="h-14 sm:h-24 w-auto object-contain hover:scale-105 transition-transform"
             />
           </span>
         </h1>
-        <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
+        <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
           Empower your team with our intuitive project management solution.
         </p>
-        <p className="text-xl mb-12 max-w-2xl mx-auto"></p>
-        <Link href="/onboarding">
-          <Button size="lg" className="mr-4">
-            Get Started <ChevronRight size={18} className="ml-1" />
-          </Button>
-        </Link>
-        <Link href="#features">
-          <Button size="lg" variant="outline">
-            Learn More
-          </Button>
-        </Link>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Link href="/onboarding">
+            <Button size="lg" className="group relative overflow-hidden">
+              <span className="relative z-10">Get Started</span>
+              <div className="absolute inset-0 bg-blue-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-200"></div>
+              <ChevronRight size={18} className="ml-1 relative z-10" />
+            </Button>
+          </Link>
+          <Link href="#features">
+            <Button size="lg" variant="outline" className="hover:bg-gray-800 transition-colors">
+              Learn More
+            </Button>
+          </Link>
+        </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="bg-gray-900 py-20 px-5">
+      <section id="features" className="relative py-24 px-5">
         <div className="container mx-auto">
-          <h3 className="text-3xl font-bold mb-12 text-center">Key Features</h3>
+          <h3 className="text-4xl font-bold mb-16 text-center gradient-title">
+            Powerful Features for Modern Teams
+          </h3>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="bg-gray-800">
-                <CardContent className="pt-6">
-                  <feature.icon className="h-12 w-12 mb-4 text-blue-300" />
-                  <h4 className="text-xl font-semibold mb-2">
+              <Card key={index} className="group hover:scale-105 transition-all duration-300 bg-gray-800/50 backdrop-blur-sm border-gray-700">
+                <CardContent className="p-8">
+                  <feature.icon className="h-12 w-12 mb-6 text-blue-400 group-hover:text-blue-300 transition-colors" />
+                  <h4 className="text-2xl font-semibold mb-4 text-gray-100">
                     {feature.title}
                   </h4>
-                  <p className="text-gray-300">{feature.description}</p>
+                  <p className="text-gray-300 leading-relaxed">{feature.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -126,10 +135,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Companies Carousel */}
-      <section className="py-20">
-        <div className="container mx-auto">
-          <h3 className="text-3xl font-bold mb-12 text-center">
+      {/* Companies Section */}
+      <section className="py-24 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-900/10 to-transparent"></div>
+        <div className="container mx-auto relative">
+          <h3 className="text-4xl font-bold mb-16 text-center gradient-title">
             Trusted by Industry Leaders
           </h3>
           <CompanyCarousel />
@@ -137,16 +147,24 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section className="bg-gray-900 py-20 px-5">
-        <div className="container mx-auto">
-          <h3 className="text-3xl font-bold mb-12 text-center">
+      <section className="py-24 px-5 relative">
+        <div className="container mx-auto max-w-4xl">
+          <h3 className="text-4xl font-bold mb-16 text-center gradient-title">
             Frequently Asked Questions
           </h3>
-          <Accordion type="single" collapsible className="w-full">
+          <Accordion type="single" collapsible className="w-full space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger>{faq.question}</AccordionTrigger>
-                <AccordionContent>{faq.answer}</AccordionContent>
+              <AccordionItem
+                key={index}
+                value={`item-${index}`}
+                className="bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700"
+              >
+                <AccordionTrigger className="px-6 py-4 hover:bg-gray-700/50 transition-colors rounded-t-lg">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="px-6 py-4 text-gray-300">
+                  {faq.answer}
+                </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
@@ -154,18 +172,26 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 text-center px-5">
-        <div className="container mx-auto">
-          <h3 className="text-3xl font-bold mb-6">
+      <section className="py-32 text-center px-5 relative">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
+        <div className="container mx-auto relative">
+          <h3 className="text-4xl font-bold mb-8 gradient-title">
             Ready to Transform Your Workflow?
           </h3>
-          <p className="text-xl mb-12">
+          <p className="text-xl mb-12 text-gray-300 max-w-2xl mx-auto">
             Join thousands of teams already using ZCRUM to streamline their
             projects and boost productivity.
           </p>
           <Link href="/onboarding">
-            <Button size="lg" className="animate-bounce">
-              Start For Free <ArrowRight className="ml-2 h-5 w-5" />
+            <Button
+              size="lg"
+              className="group relative overflow-hidden hover:scale-105 transition-all duration-300"
+            >
+              <span className="relative z-10 flex items-center">
+                Start For Free
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </span>
+              <div className="absolute inset-0 bg-blue-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-200"></div>
             </Button>
           </Link>
         </div>
