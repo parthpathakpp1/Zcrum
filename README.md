@@ -20,14 +20,13 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## About the Project 
+A web-based project management tool that helps teams organize work through organizations, projects, and sprints - similar to Jira but simplified.
 
-To learn more about Next.js, take a look at the following resources:
+##Photos 
+![zcrumshots](https://github.com/user-attachments/assets/1d08932d-9042-42e2-9ea3-db6f32a8f6fb)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+![zcrummshots](https://github.com/user-attachments/assets/fcf684d4-eae1-4c9e-8b52-d62d9c07667f)
 
 ## Deploy on Vercel
 
